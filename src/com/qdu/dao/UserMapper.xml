@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qdu.dao.UserMapper">
+	<select id="userRegister">
+		insert into user(username, password, gender, email, phone) values(#{username}, #{password}, #{gender}, #{email}, #{phone})
+	</select>
+	
+	<select id="checkUserLogin" resultType="com.qdu.bean.User">
+		select * from user where username = #{username} and password = #{password}
+	</select>
+	
+	
+	<select id="checkNameCommon" resultType="com.qdu.bean.User">
+		select * from user where username = #{username}
+	</select>
+	
+	
+	
+	
+	
+	
+
+</mapper>

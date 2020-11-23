@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qdu.dao.AdMapper">
+	
+	<select id="checkAdminLogin" resultType="com.qdu.bean.Admin">
+		select * from admin where adminname = #{adminname} and password = #{password}
+	</select>
+	<select id="getAllBooks" resultType="com.qdu.bean.Book">
+		select * from books
+	</select>
+	<select id="selectBooks" resultType="com.qdu.bean.Book">
+		select * from books where bookid = #{bookid}
+	</select>
+	<delete id="deleteBooks">
+		delete from books where bookid = #{bookid}
+	</delete>
+	<select id="getAllUsers" resultType="com.qdu.bean.User">
+		select * from user
+	</select>
+	<select id="selectUser" resultType="com.qdu.bean.User">
+		select * from user where id = #{id}
+	</select>
+	<delete id="deleteUser">
+		delete from user where id = #{id}
+	</delete>
+	<select id="selectUserByUserName" resultType="com.qdu.bean.Borrow">
+		select * from user_book where username = #{username} order by state
+	</select>
+	<select id="selectBorrowByRentid" resultType="com.qdu.bean.Borrow">
+		select * from user_book where rentid = #{rentid}
+	</select>
+	<delete id="deleteBorrowRecord">
+		delete from user_book where rentid = #{rentid}
+	</delete>
+	<update id="updateBorrowRecordState1">
+		update user_book set state = 1 where rentid = #{rentid}
+	</update>
+	<update id="updateBorrowRecordState2">
+		update user_book set state = 2 where rentid = #{rentid}
+	</update>
+	<select id="searchByUserName" resultType="com.qdu.bean.User">
+		select * from user where username = #{username}
+	</select>
+	<select id="searchByBookName" resultType="com.qdu.bean.Book">
+		select * from books where bookname = #{bookname}
+	</select>
+	<select id="getBorrowByBookId" resultType="com.qdu.bean.Borrow">
+		select * from user_book where bookid = #{bookid}
+	</select>
+	
+	<!-- ********************************************************** -->
+	<insert id="add_Book" >
+        insert into books(bookname,author,description,publisher,totalnumber,currentnumber,category) values(#{bookname},#{author},#{description},#{publisher},#{totalnumber},#{totalnumber},#{category})
+    </insert>
+    <insert id="add_user"  >
+        insert into	user(username, password, gender, email, phone) values(#{username}, #{password}, #{gender}, #{email}, #{phone})
+    </insert>
+     <update id="updateUser"  >
+    Update user set username=#{username},password=#{password},gender=#{gender},phone=#{phone},email=#{email} where id=#{id};
+    </update>
+    <update id="updateBook"  >
+    Update books set bookname=#{bookname},author=#{author},description=#{description},publisher=#{publisher},totalnumber=#{totalnumber},currentnumber=#{currentnumber},category=#{category} where bookid=#{bookid};
+    </update>
+    	
+	<select id="getbookByID"  resultType="com.qdu.bean.Book">
+    Select * from books where bookid=#{bookid};
+    </select>
+    
+    <select id="getuserByID"  resultType="com.qdu.bean.User">
+    Select * from user where id=#{id};
+    </select>
+
+</mapper>
